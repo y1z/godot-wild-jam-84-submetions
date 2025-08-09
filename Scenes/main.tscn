@@ -1,0 +1,36 @@
+[gd_scene load_steps=2 format=3 uid="uid://dcj8i1iuuxwol"]
+
+[ext_resource type="FontFile" uid="uid://kkjkpmqub1d2" path="res://Font/PublicPixel.otf" id="1_jjgbg"]
+
+[node name="Main" type="Node2D"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
+offset_right = 1157.985
+offset_bottom = 643.53
+rotation = -6.2831855
+theme_override_fonts/font = ExtResource("1_jjgbg")
+theme_override_font_sizes/font_size = 27
+text = "Hello there what is your name little one ?
+
+áéíóú ññÑÑ
+
+ÁÉÍÓÚ Ññññ ´asdf
+
+(ä, ë, ï, ö, ü) 
+
+(Ä, Ë, Ï, Ö, Ü) 
+
+ñoño 
+
+ÑoÑo
+
+() [] {} <> + - = * /"
+autowrap_mode = 3
+text_overrun_behavior = 1
