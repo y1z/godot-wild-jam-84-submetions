@@ -10,27 +10,13 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="Label" type="Label" parent="Control"]
+[node name="Score" type="Label" parent="Control"]
 layout_mode = 1
-offset_right = 1157.985
-offset_bottom = 643.53
+offset_right = 1146.5728
+offset_bottom = 50.081623
 rotation = -6.2831855
 theme_override_fonts/font = ExtResource("1_jjgbg")
 theme_override_font_sizes/font_size = 27
-text = "Hello there what is your name little one ?
-
-áéíóú ññÑÑ
-
-ÁÉÍÓÚ Ññññ ´asdf
-
-(ä, ë, ï, ö, ü) 
-
-(Ä, Ë, Ï, Ö, Ü) 
-
-ñoño 
-
-ÑoÑo
-
-() [] {} <> + - = * /"
+text = "Score"
 autowrap_mode = 3
 text_overrun_behavior = 1
