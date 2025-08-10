@@ -9,6 +9,7 @@ enum critter_type
 }
 # region const
 const minimum_speed = 400.0;
+# endregion 
 
 @export_group("VARIABLES")
 @export var type : critter_type = critter_type.NONE
@@ -22,7 +23,7 @@ func _ready() -> void:
 	collision_shape = %"Critter Hitbox".shape;
 	if speed < minimum_speed :
 		speed = minimum_speed
-	
+		
 	
 	pass
 

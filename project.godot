@@ -21,7 +21,7 @@ Util="*res://Scripts/util.gd"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot-vim/plugin.cfg")
+enabled=PackedStringArray("res://addons/godot-vim/plugin.cfg", "res://addons/indent_guidelines/plugin.cfg")
 
 [file_customization]
 
