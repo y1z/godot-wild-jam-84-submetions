@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="template"
+config/name="Wild"
 run/main_scene="uid://dcj8i1iuuxwol"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
@@ -18,6 +18,10 @@ config/icon="res://icon.svg"
 [autoload]
 
 Util="*res://Scripts/util.gd"
+
+[display]
+
+window/stretch/mode="viewport"
 
 [editor_plugins]
 
