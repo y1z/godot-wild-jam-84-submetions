@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dcj8i1iuuxwol"]
+[gd_scene load_steps=3 format=3 uid="uid://dcj8i1iuuxwol"]
 
 [ext_resource type="FontFile" uid="uid://kkjkpmqub1d2" path="res://Font/PublicPixel.otf" id="1_jjgbg"]
+[ext_resource type="PackedScene" uid="uid://bwksi02isilta" path="res://Entities/critter.tscn" id="2_bo1nx"]
 
 [node name="Main" type="Node2D"]
 
@@ -20,3 +21,5 @@ theme_override_font_sizes/font_size = 27
 text = "Score"
 autowrap_mode = 3
 text_overrun_behavior = 1
+
+[node name="Critter" parent="." instance=ExtResource("2_bo1nx")]

@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://bwksi02isilta"]
+
+[ext_resource type="Texture2D" uid="uid://bqxsdths03efw" path="res://Sprites/icon2.svg" id="1_3exs8"]
+[ext_resource type="Script" uid="uid://bdd334ugoadcc" path="res://Scripts/critter.gd" id="1_5q6ww"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5q6ww"]
+
+[node name="Critter" type="CharacterBody2D"]
+script = ExtResource("1_5q6ww")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_3exs8")
+
+[node name="Critter Hitbox" type="CollisionShape2D" parent="."]
+unique_name_in_owner = true
+shape = SubResource("RectangleShape2D_5q6ww")
