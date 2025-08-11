@@ -7,6 +7,13 @@ enum critter_type
 	Safe,
 	Danger
 }
+
+enum critter_state
+{
+	free_roam,
+	clicked_on,
+}
+
 #region const
 const minimum_speed = 400.0;
 const default_target_area:Rect2i = Rect2i(0,0,Constants.default_screen_size.x, Constants.default_screen_size.y)
@@ -40,8 +47,9 @@ func _ready() -> void:
 
 func _input(event):
 	if event.is_action_pressed(&"l_click"):
-		target = get_global_mouse_position()
-		
+		handle_left_click()
+	
+	pass
 
 func _process(delta: float) -> void:
 	if target.distance_to(position) < minimum_distance_from_target:
@@ -50,10 +58,6 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta):
 	velocity = position.direction_to(target) * speed
-	
-	if collision_shape.get_rect().has_point(to_local(get_global_mouse_position()) ):
-		#print("is inside rectangle")
-		pass
 	
 	if position.distance_to(target) > 10:
 		move_and_slide()
@@ -65,3 +69,9 @@ func gen_random_pos() -> Vector2:
 	result.x = rand_x_pos;
 	result.y = rand_y_pos;
 	return result;
+
+func handle_left_click() -> void:
+	if collision_shape.get_rect().has_point(to_local(get_global_mouse_position()) ):
+		print("has been clicked on")
+		pass
+	pass
