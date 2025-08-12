@@ -4,8 +4,8 @@ class_name Critter
 enum critter_type
 {
 	NONE = 0,
-	Safe,
-	Danger
+	safe,
+	danger
 }
 
 enum critter_state
@@ -27,6 +27,7 @@ const default_minimum_distance_from_target:float = 50.0;
 @export var speed :float = 0 
 @export var target_area : Rect2i ;
 @export var minimum_distance_from_target:float = 0
+var state : critter_state = critter_state.free_roam
 var rng = RandomNumberGenerator.new()
 #endregion 
 
