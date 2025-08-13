@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://mxhbtsjpjwve"]
+
+[ext_resource type="Texture2D" uid="uid://q66vad3jtivw" path="res://Sprites/critter_grid_danger.png" id="1_11ji5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_stflh"]
+
+[node name="CritterGrid" type="Node2D"]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_stflh")
+
+[node name="Danger Grid" type="Sprite2D" parent="."]
+texture = ExtResource("1_11ji5")
+
+[node name="Safe Grid" type="Sprite2D" parent="."]

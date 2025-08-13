@@ -10,7 +10,8 @@ config_version=5
 
 [application]
 
-config/name="Wild"
+config/name="Godot Wild Jam 84"
+config/description="my game for the jam : https://itch.io/jam/godot-wild-jam-84"
 run/main_scene="uid://dcj8i1iuuxwol"
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
