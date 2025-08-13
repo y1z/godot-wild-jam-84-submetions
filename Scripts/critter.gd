@@ -1,19 +1,6 @@
 extends CharacterBody2D
 class_name Critter
 
-enum critter_type
-{
-	NONE = 0,
-	safe,
-	danger
-}
-
-enum critter_state
-{
-	free_roam,
-	clicked_on,
-}
-
 #region const
 const minimum_speed = 400.0;
 const default_target_area:Rect2i = Rect2i(0,0,Constants.default_screen_size.x, Constants.default_screen_size.y)
@@ -22,16 +9,19 @@ const default_minimum_distance_from_target:float = 50.0;
 
 #region var
 @export_group("VARIABLES")
-@export var type : critter_type = critter_type.NONE
+@export var type : Enums.critter_type =  Enums.critter_type.NONE
 @export var target :Vector2 = position 
 @export var speed :float = 0 
 @export var target_area : Rect2i ;
 @export var minimum_distance_from_target:float = 0
-var state : critter_state = critter_state.free_roam
+
+var state : Enums.critter_state = Enums.critter_state.free_roam
 var rng = RandomNumberGenerator.new()
+var collision_shape : RectangleShape2D
 #endregion 
 
-var collision_shape : RectangleShape2D;
+
+#region build-in
 
 func _ready() -> void:
 	collision_shape = %"Critter Hitbox".shape;
@@ -52,16 +42,29 @@ func _input(event):
 	
 	pass
 
-func _process(delta: float) -> void:
-	if target.distance_to(position) < minimum_distance_from_target:
-		target = gen_random_pos()
+func _process(_delta: float) -> void:
+	match state:
+		Enums.critter_state.free_roam:
+			free_roam_state()
+		Enums.critter_state.clicked_on:
+			click_on_state()
+			pass
+		_:
+			push_error("Unhandled case %s" % state)
 	pass
 
-func _physics_process(delta):
-	velocity = position.direction_to(target) * speed
+func _physics_process(_delta):
 	
-	if position.distance_to(target) > 10:
-		move_and_slide()
+	match state:
+		Enums.critter_state.free_roam:
+			physics_free_roam()
+			pass
+		Enums.critter_state.clicked_on:
+			pass
+		_:
+			push_error("Unhandled case %s" % state)
+	pass
+#endregion
 
 func gen_random_pos() -> Vector2:
 	var result = Vector2(0,0)
@@ -72,7 +75,28 @@ func gen_random_pos() -> Vector2:
 	return result;
 
 func handle_left_click() -> void:
-	if collision_shape.get_rect().has_point(to_local(get_global_mouse_position()) ):
-		print("has been clicked on")
+	var has_been_clicked_on:bool = Util.does_mouse_intersect_with_rect(collision_shape.get_rect() ,self) 
+	if has_been_clicked_on:
+		state = Enums.critter_state.clicked_on
 		pass
 	pass
+
+#region state functions
+	
+func free_roam_state() -> void:
+	if target.distance_to(position) < minimum_distance_from_target:
+		target = gen_random_pos()
+	pass
+
+func physics_free_roam():
+	velocity = position.direction_to(target) * speed
+	
+	if position.distance_to(target) > 10:
+		move_and_slide()
+	pass
+
+func click_on_state() -> void:
+	position = get_global_mouse_position()
+	pass
+
+#endregion
