@@ -39,7 +39,6 @@ func _ready() -> void:
 func _input(event):
 	if event.is_action_pressed(&"l_click"):
 		handle_left_click()
-	
 	pass
 
 func _process(_delta: float) -> void:
@@ -48,6 +47,7 @@ func _process(_delta: float) -> void:
 			free_roam_state()
 		Enums.critter_state.clicked_on:
 			click_on_state()
+		Enums.critter_state.stoped:
 			pass
 		_:
 			push_error("Unhandled case %s" % state)
@@ -58,8 +58,10 @@ func _physics_process(_delta):
 	match state:
 		Enums.critter_state.free_roam:
 			physics_free_roam()
-			pass
 		Enums.critter_state.clicked_on:
+			# do nothing on purpose 
+			pass
+		Enums.critter_state.stoped:
 			pass
 		_:
 			push_error("Unhandled case %s" % state)
@@ -75,10 +77,16 @@ func gen_random_pos() -> Vector2:
 	return result;
 
 func handle_left_click() -> void:
-	var has_been_clicked_on:bool = Util.does_mouse_intersect_with_rect(collision_shape.get_rect() ,self) 
-	if has_been_clicked_on:
-		state = Enums.critter_state.clicked_on
-		pass
+	match state:
+		Enums.critter_state.free_roam:
+			var has_been_clicked_on:bool = Util.does_mouse_intersect_with_rect(collision_shape.get_rect() ,self) 
+			if has_been_clicked_on:
+				state = Enums.critter_state.clicked_on
+		Enums.critter_state.clicked_on:
+			if position.x < 300:
+				state = Enums.critter_state.free_roam
+			elif position.x > 300:
+				state = Enums.critter_state.stoped
 	pass
 
 #region state functions
@@ -97,6 +105,9 @@ func physics_free_roam():
 
 func click_on_state() -> void:
 	position = get_global_mouse_position()
+	pass
+
+func stoped_state() -> void:
 	pass
 
 #endregion
