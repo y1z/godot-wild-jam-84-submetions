@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dcj8i1iuuxwol"]
+[gd_scene load_steps=4 format=3 uid="uid://dcj8i1iuuxwol"]
 
 [ext_resource type="FontFile" uid="uid://kkjkpmqub1d2" path="res://Font/PublicPixel.otf" id="1_jjgbg"]
 [ext_resource type="PackedScene" uid="uid://bwksi02isilta" path="res://Entities/critter.tscn" id="2_bo1nx"]
+[ext_resource type="PackedScene" uid="uid://mxhbtsjpjwve" path="res://Entities/critter_grid.tscn" id="3_8gbba"]
 
 [node name="Main" type="Node2D"]
 
@@ -27,3 +28,6 @@ type = null
 speed = null
 target_area = null
 minimum_distance_from_target = null
+
+[node name="CritterGrid" parent="." instance=ExtResource("3_8gbba")]
+position = Vector2(340, 314)
