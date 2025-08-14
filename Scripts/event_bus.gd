@@ -1,7 +1,7 @@
 extends Node
 
 class ClickedWithCreatureData:
-	var mouse_pos :Vector2 
+	var global_mouse_pos :Vector2 
 	var critter : Critter
 	
 

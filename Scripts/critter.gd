@@ -83,10 +83,10 @@ func handle_left_click() -> void:
 			if has_been_clicked_on:
 				state = Enums.critter_state.clicked_on
 		Enums.critter_state.clicked_on:
-			if position.x < 300:
-				state = Enums.critter_state.free_roam
-			elif position.x > 300:
-				state = Enums.critter_state.stoped
+			var eventData:EventBus.ClickedWithCreatureData
+			eventData.critter = get_class()
+			eventData.global_mouse_pos = get_global_mouse_position()
+			EventBus.clicked_with_creature.emit(eventData)
 	pass
 
 #region state functions

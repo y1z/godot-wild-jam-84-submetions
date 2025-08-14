@@ -30,4 +30,5 @@ target_area = null
 minimum_distance_from_target = null
 
 [node name="CritterGrid" parent="." instance=ExtResource("3_8gbba")]
-position = Vector2(340, 314)
+position = Vector2(234, 359)
+critter_type = 1
