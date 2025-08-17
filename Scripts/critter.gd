@@ -12,6 +12,8 @@ const default_minimum_distance_from_target:float = 50.0;
 @export_group("VARIABLES")
 @export var data:ClassData.CritterData = null
 
+@export var critter_type :Enums.critter_type 
+
 var safe_sprite :Sprite2D
 var danger_sprite :Sprite2D
 	
@@ -25,6 +27,9 @@ var collision_shape : RectangleShape2D
 func _ready() -> void:
 	if data == null:
 		data = ClassData.CritterData.new()
+	
+	if critter_type ==  Enums.critter_type.NONE:
+		critter_type = Enums.critter_type.safe
 	
 	safe_sprite =%"Safe Critter Sprite"
 	danger_sprite =%"Danger Critter Sprite"
@@ -59,7 +64,11 @@ func _process(_delta: float) -> void:
 			pass
 		_:
 			push_error("Unhandled case %s" % data.state)
-	pass
+	
+	var should_safe_be_visible:bool = Enums.critter_type.safe == critter_type
+		
+	safe_sprite.visible =  should_safe_be_visible
+	danger_sprite.visible = !should_safe_be_visible 
 
 func _physics_process(_delta:float) -> void:
 	
@@ -93,6 +102,7 @@ func handle_left_click() -> void:
 		Enums.critter_state.clicked_on:
 			var eventData:EventBus.ClickedWithCreatureData=EventBus.ClickedWithCreatureData.new()
 			eventData.critter = data;
+			eventData.critter.type = self.critter_type
 			eventData.global_mouse_pos = get_global_mouse_position()
 			EventBus.clicked_with_creature.emit(eventData)
 	pass

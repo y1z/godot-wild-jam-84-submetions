@@ -6,3 +6,5 @@ class ClickedWithCreatureData:
 	
 
 signal clicked_with_creature(data :ClickedWithCreatureData)
+
+signal critter_count_down(should_count_down:bool)

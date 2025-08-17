@@ -24,6 +24,7 @@ func _ready() -> void:
 	
 	if error_code != OK:
 		printerr("[ERROR] %s" % error_code)
+		
 	
 	select_the_grid_to_show();
 	pass
@@ -53,8 +54,5 @@ func on_clicked_with_creature(data:EventBus.ClickedWithCreatureData):
 	var has_same_critter_type : bool = data.critter.type == critter_type;
 	if should_keep_critter_in_grid && has_same_critter_type:
 		data.critter.state = Enums.critter_state.stoped
-	pass
-
-func on_shit(data : String):
-	print(data)
+		EventBus.critter_count_down.emit(true)
 	pass

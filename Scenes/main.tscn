@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://dcj8i1iuuxwol"]
+[gd_scene load_steps=6 format=3 uid="uid://dcj8i1iuuxwol"]
 
 [ext_resource type="FontFile" uid="uid://kkjkpmqub1d2" path="res://Font/PublicPixel.otf" id="1_jjgbg"]
 [ext_resource type="PackedScene" uid="uid://bwksi02isilta" path="res://Entities/critter.tscn" id="2_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://mxhbtsjpjwve" path="res://Entities/critter_grid.tscn" id="3_8gbba"]
+[ext_resource type="PackedScene" uid="uid://cw6vwvn2rlwv" path="res://Entities/critter_manager.tscn" id="4_jjvhh"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8gbba"]
 content_margin_left = 0.0
@@ -31,8 +32,10 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_8gbba")
 
 [node name="Score" type="Label" parent="Control"]
 layout_mode = 1
-offset_right = 1146.5728
-offset_bottom = 50.081623
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 1147.5728
+offset_bottom = 51.081623
 rotation = -6.2831855
 theme_override_fonts/font = ExtResource("1_jjgbg")
 theme_override_font_sizes/font_size = 27
@@ -51,3 +54,8 @@ scale = Vector2(2, 2)
 critter_type = 1
 
 [node name="Critter" parent="." instance=ExtResource("2_bo1nx")]
+visible = false
+position = Vector2(505, 113)
+critter_type = 2
+
+[node name="CritterManager" parent="." instance=ExtResource("4_jjvhh")]
