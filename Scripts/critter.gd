@@ -12,6 +12,9 @@ const default_minimum_distance_from_target:float = 50.0;
 @export_group("VARIABLES")
 @export var data:ClassData.CritterData = null
 
+var safe_sprite :Sprite2D
+var danger_sprite :Sprite2D
+	
 var rng  := RandomNumberGenerator.new()
 var collision_shape : RectangleShape2D
 #endregion 
@@ -22,7 +25,10 @@ var collision_shape : RectangleShape2D
 func _ready() -> void:
 	if data == null:
 		data = ClassData.CritterData.new()
-		
+	
+	safe_sprite =%"Safe Critter Sprite"
+	danger_sprite =%"Danger Critter Sprite"
+	
 	collision_shape = %"Critter Hitbox".shape;
 	if data.speed < minimum_speed :
 		data.speed = minimum_speed
@@ -32,6 +38,9 @@ func _ready() -> void:
 	
 	if data.target_area.size.x == 0 && data.target_area.size.y == 0:
 		data.target_area = default_target_area
+		
+	if data.type == Enums.critter_type.NONE:
+		data.type = Enums.critter_type.safe
 	
 	pass
 

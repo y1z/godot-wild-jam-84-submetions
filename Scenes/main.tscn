@@ -1,8 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://dcj8i1iuuxwol"]
+[gd_scene load_steps=5 format=3 uid="uid://dcj8i1iuuxwol"]
 
 [ext_resource type="FontFile" uid="uid://kkjkpmqub1d2" path="res://Font/PublicPixel.otf" id="1_jjgbg"]
 [ext_resource type="PackedScene" uid="uid://bwksi02isilta" path="res://Entities/critter.tscn" id="2_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://mxhbtsjpjwve" path="res://Entities/critter_grid.tscn" id="3_8gbba"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8gbba"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0, 0, 0, 1)
+corner_detail = 1
 
 [node name="Main" type="Node2D"]
 
@@ -11,6 +19,15 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="Panel" type="Panel" parent="Control"]
+layout_mode = 0
+offset_left = -3.000001
+offset_top = -9.999996
+offset_right = 37.0
+offset_bottom = 30.000004
+scale = Vector2(41.52405, 25.667488)
+theme_override_styles/panel = SubResource("StyleBoxFlat_8gbba")
 
 [node name="Score" type="Label" parent="Control"]
 layout_mode = 1
@@ -23,8 +40,14 @@ text = "Score"
 autowrap_mode = 3
 text_overrun_behavior = 1
 
-[node name="Critter" parent="." instance=ExtResource("2_bo1nx")]
+[node name="CritterGrid2" parent="." instance=ExtResource("3_8gbba")]
+position = Vector2(884, 326)
+scale = Vector2(2, 2)
+critter_type = 2
 
 [node name="CritterGrid" parent="." instance=ExtResource("3_8gbba")]
-position = Vector2(234, 359)
+position = Vector2(294, 327)
+scale = Vector2(2, 2)
 critter_type = 1
+
+[node name="Critter" parent="." instance=ExtResource("2_bo1nx")]

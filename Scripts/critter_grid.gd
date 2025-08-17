@@ -20,7 +20,10 @@ func _ready() -> void:
 		critter_type = Enums.critter_type.safe
 		print("critter_grid get default assigned")
 	
-	EventBus.clicked_with_creature.connect(on_clicked_with_creature)
+	var error_code := EventBus.clicked_with_creature.connect(on_clicked_with_creature)
+	
+	if error_code != OK:
+		printerr("[ERROR] %s" % error_code)
 	
 	select_the_grid_to_show();
 	pass
@@ -47,9 +50,9 @@ func select_the_grid_to_show() -> void:
 
 func on_clicked_with_creature(data:EventBus.ClickedWithCreatureData):
 	var should_keep_critter_in_grid:bool = col_shape.get_rect().has_point(to_local(data.global_mouse_pos))
-	if should_keep_critter_in_grid:
+	var has_same_critter_type : bool = data.critter.type == critter_type;
+	if should_keep_critter_in_grid && has_same_critter_type:
 		data.critter.state = Enums.critter_state.stoped
-		pass
 	pass
 
 func on_shit(data : String):
