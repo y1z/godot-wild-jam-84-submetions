@@ -1,7 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://dcj8i1iuuxwol"]
+[gd_scene load_steps=6 format=3 uid="uid://dcj8i1iuuxwol"]
 
 [ext_resource type="FontFile" uid="uid://kkjkpmqub1d2" path="res://Font/PublicPixel.otf" id="1_jjgbg"]
 [ext_resource type="PackedScene" uid="uid://bwksi02isilta" path="res://Entities/critter.tscn" id="2_bo1nx"]
+[ext_resource type="PackedScene" uid="uid://mxhbtsjpjwve" path="res://Entities/critter_grid.tscn" id="3_8gbba"]
+[ext_resource type="PackedScene" uid="uid://cw6vwvn2rlwv" path="res://Entities/critter_manager.tscn" id="4_jjvhh"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8gbba"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0, 0, 0, 1)
+corner_detail = 1
 
 [node name="Main" type="Node2D"]
 
@@ -11,10 +21,21 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
+[node name="Panel" type="Panel" parent="Control"]
+layout_mode = 0
+offset_left = -3.000001
+offset_top = -9.999996
+offset_right = 37.0
+offset_bottom = 30.000004
+scale = Vector2(41.52405, 25.667488)
+theme_override_styles/panel = SubResource("StyleBoxFlat_8gbba")
+
 [node name="Score" type="Label" parent="Control"]
 layout_mode = 1
-offset_right = 1146.5728
-offset_bottom = 50.081623
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 1147.5728
+offset_bottom = 51.081623
 rotation = -6.2831855
 theme_override_fonts/font = ExtResource("1_jjgbg")
 theme_override_font_sizes/font_size = 27
@@ -22,8 +43,19 @@ text = "Score"
 autowrap_mode = 3
 text_overrun_behavior = 1
 
+[node name="CritterGrid2" parent="." instance=ExtResource("3_8gbba")]
+position = Vector2(884, 326)
+scale = Vector2(2, 2)
+critter_type = 2
+
+[node name="CritterGrid" parent="." instance=ExtResource("3_8gbba")]
+position = Vector2(294, 327)
+scale = Vector2(2, 2)
+critter_type = 1
+
 [node name="Critter" parent="." instance=ExtResource("2_bo1nx")]
-type = null
-speed = null
-target_area = null
-minimum_distance_from_target = null
+visible = false
+position = Vector2(505, 113)
+critter_type = 2
+
+[node name="CritterManager" parent="." instance=ExtResource("4_jjvhh")]

@@ -1,18 +1,24 @@
-[gd_scene load_steps=4 format=3 uid="uid://bwksi02isilta"]
+[gd_scene load_steps=5 format=3 uid="uid://bwksi02isilta"]
 
-[ext_resource type="Texture2D" uid="uid://bqxsdths03efw" path="res://Sprites/icon2.svg" id="1_3exs8"]
 [ext_resource type="Script" uid="uid://bdd334ugoadcc" path="res://Scripts/critter.gd" id="1_5q6ww"]
+[ext_resource type="Texture2D" uid="uid://dewjuhc0xpdhd" path="res://Sprites/safe critter.png" id="2_plasu"]
+[ext_resource type="Texture2D" uid="uid://mfbhpujtx7c7" path="res://Sprites/Danger critter.png" id="3_mfhuc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5q6ww"]
-size = Vector2(110, 101)
+size = Vector2(56, 64)
 
 [node name="Critter" type="CharacterBody2D"]
 script = ExtResource("1_5q6ww")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_3exs8")
+[node name="Safe Critter Sprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+texture = ExtResource("2_plasu")
+
+[node name="Danger Critter Sprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+texture = ExtResource("3_mfhuc")
 
 [node name="Critter Hitbox" type="CollisionShape2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(-1, -0.5)
+position = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_5q6ww")
