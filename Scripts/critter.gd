@@ -1,6 +1,7 @@
 extends CharacterBody2D
 class_name Critter
 
+
 #region const
 const minimum_speed = 400.0;
 const default_target_area:Rect2i = Rect2i(0,0,Constants.default_screen_size.x, Constants.default_screen_size.y)
@@ -9,40 +10,38 @@ const default_minimum_distance_from_target:float = 50.0;
 
 #region var
 @export_group("VARIABLES")
-@export var type : Enums.critter_type =  Enums.critter_type.NONE
-@export var target :Vector2 = position 
-@export var speed :float = 0 
-@export var target_area : Rect2i ;
-@export var minimum_distance_from_target:float = 0
+@export var data:ClassData.CritterData = null
 
-var state : Enums.critter_state = Enums.critter_state.free_roam
-var rng = RandomNumberGenerator.new()
+var rng  := RandomNumberGenerator.new()
 var collision_shape : RectangleShape2D
 #endregion 
 
 
-#region build-in
+#region build-in funcs
 
 func _ready() -> void:
+	if data == null:
+		data = ClassData.CritterData.new()
+		
 	collision_shape = %"Critter Hitbox".shape;
-	if speed < minimum_speed :
-		speed = minimum_speed
+	if data.speed < minimum_speed :
+		data.speed = minimum_speed
 	
-	if minimum_distance_from_target < 0.1:
-		minimum_distance_from_target = default_minimum_distance_from_target;
+	if data.minimum_distance_from_target < 0.1:
+		data.minimum_distance_from_target = default_minimum_distance_from_target;
 	
-	if target_area.size.x == 0 && target_area.size.y == 0:
-		target_area = default_target_area
+	if data.target_area.size.x == 0 && data.target_area.size.y == 0:
+		data.target_area = default_target_area
 	
 	pass
 
-func _input(event):
+func _input(event:InputEvent) -> void:
 	if event.is_action_pressed(&"l_click"):
 		handle_left_click()
 	pass
 
 func _process(_delta: float) -> void:
-	match state:
+	match data.state:
 		Enums.critter_state.free_roam:
 			free_roam_state()
 		Enums.critter_state.clicked_on:
@@ -50,12 +49,12 @@ func _process(_delta: float) -> void:
 		Enums.critter_state.stoped:
 			pass
 		_:
-			push_error("Unhandled case %s" % state)
+			push_error("Unhandled case %s" % data.state)
 	pass
 
-func _physics_process(_delta):
+func _physics_process(_delta:float) -> void:
 	
-	match state:
+	match data.state:
 		Enums.critter_state.free_roam:
 			physics_free_roam()
 		Enums.critter_state.clicked_on:
@@ -64,27 +63,27 @@ func _physics_process(_delta):
 		Enums.critter_state.stoped:
 			pass
 		_:
-			push_error("Unhandled case %s" % state)
+			push_error("Unhandled case %s" % data.state)
 	pass
 #endregion
 
 func gen_random_pos() -> Vector2:
-	var result = Vector2(0,0)
-	var rand_x_pos = rng.randf_range(0,target_area.size.x)
-	var rand_y_pos = rng.randf_range(0,target_area.size.y)
+	var result := Vector2(0,0)
+	var rand_x_pos := rng.randf_range(0,data.target_area.size.x)
+	var rand_y_pos := rng.randf_range(0,data.target_area.size.y)
 	result.x = rand_x_pos;
 	result.y = rand_y_pos;
 	return result;
 
 func handle_left_click() -> void:
-	match state:
+	match data.state:
 		Enums.critter_state.free_roam:
 			var has_been_clicked_on:bool = Util.does_mouse_intersect_with_rect(collision_shape.get_rect() ,self) 
 			if has_been_clicked_on:
-				state = Enums.critter_state.clicked_on
+				data.state = Enums.critter_state.clicked_on
 		Enums.critter_state.clicked_on:
-			var eventData:EventBus.ClickedWithCreatureData
-			eventData.critter = get_class()
+			var eventData:EventBus.ClickedWithCreatureData=EventBus.ClickedWithCreatureData.new()
+			eventData.critter = data;
 			eventData.global_mouse_pos = get_global_mouse_position()
 			EventBus.clicked_with_creature.emit(eventData)
 	pass
@@ -92,15 +91,17 @@ func handle_left_click() -> void:
 #region state functions
 	
 func free_roam_state() -> void:
-	if target.distance_to(position) < minimum_distance_from_target:
-		target = gen_random_pos()
+	if data.target.distance_to(position) < data.minimum_distance_from_target:
+		data.target = gen_random_pos()
 	pass
 
-func physics_free_roam():
-	velocity = position.direction_to(target) * speed
+func physics_free_roam() -> void:
+	velocity = position.direction_to(data.target) *data.speed
 	
-	if position.distance_to(target) > 10:
+	if position.distance_to(data.target) > 10:
+		@warning_ignore_start("return_value_discarded")
 		move_and_slide()
+		@warning_ignore_restore("return_value_discarded")
 	pass
 
 func click_on_state() -> void:

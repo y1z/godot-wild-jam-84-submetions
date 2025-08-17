@@ -8,10 +8,6 @@ size = Vector2(110, 101)
 
 [node name="Critter" type="CharacterBody2D"]
 script = ExtResource("1_5q6ww")
-type = null
-speed = null
-target_area = null
-minimum_distance_from_target = null
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_3exs8")
