@@ -55,4 +55,7 @@ func on_clicked_with_creature(data:EventBus.ClickedWithCreatureData):
 	if should_keep_critter_in_grid && has_same_critter_type:
 		data.critter.state = Enums.critter_state.stoped
 		EventBus.critter_count_down.emit(true)
+		var score_increment := EventBus.ScoreIncrement.new();
+		score_increment.increament = 10
+		EventBus.increment_score.emit(score_increment)
 	pass
