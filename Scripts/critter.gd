@@ -35,6 +35,7 @@ func _ready() -> void:
 	danger_sprite =%"Danger Critter Sprite"
 	
 	collision_shape = %"Critter Hitbox".shape;
+	%"Critter Hitbox".disabled = true;
 	if data.speed < minimum_speed :
 		data.speed = minimum_speed
 	

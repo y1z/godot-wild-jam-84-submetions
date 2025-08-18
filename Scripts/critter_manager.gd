@@ -4,7 +4,7 @@ var critter_danger :PackedScene = preload("uid://dh5k032kukcr5" )
 var critter_count :int= 0;
 
 func _ready() -> void:
-	var error_code = EventBus.critter_count_down.connect(on_criter_count_down)
+	var error_code := EventBus.critter_count_down.connect(on_criter_count_down)
 	if error_code != OK:
 		printerr("error code [%s]" % error_code)
 	critter_count = 0;
@@ -18,16 +18,19 @@ func _ready() -> void:
 		add_child(critter_temp)
 		critter_count += 1;
 		pass
-	pass # Replace with function body.
+	pass 
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+@warning_ignore_start("unused_parameter")
+@warning_ignore_start("return_value_discarded")
 func _process(delta: float) -> void:
 	if critter_count < 1:
 		get_tree().reload_current_scene()
 		pass
 	
 	pass
+@warning_ignore_restore("return_value_discarded")
+@warning_ignore_restore("unused_parameter")
 
 func on_criter_count_down(should_count_down:bool)->void:
 	if should_count_down != true :

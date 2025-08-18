@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://dcj8i1iuuxwol"]
+[gd_scene load_steps=5 format=3 uid="uid://dcj8i1iuuxwol"]
 
 [ext_resource type="FontFile" uid="uid://kkjkpmqub1d2" path="res://Font/PublicPixel.otf" id="1_jjgbg"]
-[ext_resource type="PackedScene" uid="uid://bwksi02isilta" path="res://Entities/critter.tscn" id="2_bo1nx"]
 [ext_resource type="PackedScene" uid="uid://mxhbtsjpjwve" path="res://Entities/critter_grid.tscn" id="3_8gbba"]
 [ext_resource type="PackedScene" uid="uid://cw6vwvn2rlwv" path="res://Entities/critter_manager.tscn" id="4_jjvhh"]
 
@@ -52,10 +51,5 @@ critter_type = 2
 position = Vector2(294, 327)
 scale = Vector2(2, 2)
 critter_type = 1
-
-[node name="Critter" parent="." instance=ExtResource("2_bo1nx")]
-visible = false
-position = Vector2(505, 113)
-critter_type = 2
 
 [node name="CritterManager" parent="." instance=ExtResource("4_jjvhh")]
